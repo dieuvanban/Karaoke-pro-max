@@ -4,50 +4,24 @@
     "title": "Hình bóng quê nhà",
     "singer": "Karaoke",
     "tone": "Am",
-    "lyrics": "Về tới đầu [Dm]làng con chim sáo [Am]nhỏ hát vang rộn [Dm]ràng
-Qua nhịp cầu [G]tre, qua mấy con đê thắm đượm tình [A]quê
-[C]Bao năm qua cách trở đường [F]xa xuôi ngược bôn [Bb]ba
-[G]Ôi kỷ niệm [Am]yêu, mái tranh nghèo tỏa khói lam [Dm]chiều.
-.
-Còn nhớ nụ [Dm]cười, câu ca mát [Am]rượi chứa chan lòng [Dm]người
-Đâu rồi ngày [G]xưa, ai đón ai đưa nắng đượm chiều [A]mưa
-[C]Quê hương ơi, ấm mãi đời [F]tôi uống ngọt đôi [Bb]môi
-[G]Thương quá là [Am]thương, tuổi thơ nào ngọt đắng vui [Dm]buồn.
-.
-À [G]ơi, con nước lớn chảy xuôi
-Đưa con thuyền chao [F]nghiêng
-theo nhịp chèo [Bb]bơi ai ngân nga câu [A]hò
-Hò [Dm]ơi, gió đưa gió đẩy, về rẫy ăn [G]còng
-Về sông ăn [A]cá, về sông ăn cá, về đồng ăn [Dm]cua.
-.
-Từ lúc vào [Dm]đời, chân quen đất [Am]nẻ sớm trưa chiều [Dm]hè
-Ôi đẹp làm [G]sao, đêm sáng trăng cao gõ nhịp chày [A]mau
-[C]Nghe quê hương tiếng gọi mời [F]thương những ngày tha [Bb]phương
-[G]Trong cõi đời [Am]ta, giữ bên lòng hình bóng quê [Dm]nhà."
+    "lyrics": [
+      "Về tới đầu [Dm]làng con chim sáo [Am]nhỏ hát vang rộn [Dm]ràng",
+      "Qua nhịp cầu [G]tre, qua mấy con đê thắm đượm tình [A]quê",
+      "",
+      "[C]Bao năm qua cách trở đường [F]xa xuôi ngược bôn [Bb]ba",
+      "[G]Ôi kỷ niệm [Am]yêu, mái tranh nghèo tỏa khói lam [Dm]chiều."
+    ]
   },
   {
     "title": "Tình thôi xót xa",
     "singer": "Lam Trường",
     "tone": "C",
-    "lyrics": "Từ [C]khi quen em anh đã [Em]biết bối rối 
-Vì những [F]lúc thoáng nghe em [Em]cười
-Anh đã [F]biết con [G]tim yêu [Em]em mất [Am]rồi 
-Người [D]yêu ơi xin em chớ [G]quên 
- 
-Mùa [C]xuân trên cao và hoa [Em]lá lấp lánh nắng 
-Nụ hôn [F]thơ ngây trao em [Em]rồi
-Em yêu [F]kiều thướt [G]tha cho [Em]hồn đắm [Am]say
-Cuộc [F]tình ngỡ dài lâu ngủ [D7]sâu vòng tay êm [G]ái. [G7]
- 
-ĐK:
-[C]Anh nào biết [Em]anh nào có [Am]hay
-[F]Hạnh phúc trôi qua [Em]tay giấc mộng tàn
-[F]Lòng cay [G]đắng khi [Em]em quên lối [Am]hẹn
-Lời [D]yêu rồi thương em đã [G7]quên
- 
-[C]Nhưng lòng anh [Em]nuôi hoài giấc [Am]mơ
-[F]Tình sẽ không phôi [Em]phai như là mây
-[F]Có nhiều [G]đêm trong [Em]mơ anh vẫn [Am]chờ
-Chờ [F]em đến [Fm]tình thôi xót [C]xa."
+    "lyrics": [
+      "Từ [C]khi quen em anh đã [Em]biết bối rối",
+      "Vì những [F]lúc thoáng nghe em [Em]cười",
+      "",
+      "Anh đã [F]biết con [G]tim yêu [Em]em mất [Am]rồi",
+      "Người [D]yêu ơi xin em chớ [G]quên"
+    ]
   }
 ]
