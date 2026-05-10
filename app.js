@@ -1,27 +1,36 @@
 
-const SONGS_URL = "https://dieuvanban.github.io/Karaoke-pro-max/songs.json";
+const SONGS_URL = "https://dieuvanban.github.io/Karaoke-pro-max/songs.json?v=3";
 
 let allSongs = [];
 let filteredSongs = [];
 
 async function loadSongs() {
     try {
-        showLoading(true);
+        console.log("Đang tải dữ liệu:", SONGS_URL);
 
-        const response = await fetch(SONGS_URL + "?v=" + Date.now());
+        const response = await fetch(SONGS_URL, {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+
         allSongs = await response.json();
 
         filteredSongs = [...allSongs];
 
+        console.log("Đã tải", allSongs.length, "bài hát");
+
         renderSongs(filteredSongs);
 
-        console.log("Đã tải:", allSongs.length, "bài hát");
-
     } catch (err) {
-        console.error(err);
-        alert("Không tải được rồi Điều ơi. dữ liệu bài hát!");
-    } finally {
-        showLoading(false);
+        console.error("Lỗi tải JSON:", err);
+
+        alert(
+            "Không tải được dữ liệu bài hát!\n\n" +
+            "Chi tiết: " + err.message
+        );
     }
 }
 
@@ -33,33 +42,39 @@ function normalizeText(text = "") {
 }
 
 function searchSongs(keyword) {
+
     if (!keyword.trim()) {
-        filteredSongs = [...allSongs];
-        renderSongs(filteredSongs);
+        renderSongs(allSongs);
         return;
     }
 
     const kw = normalizeText(keyword);
 
-    filteredSongs = allSongs.filter(song => {
+    const result = allSongs.filter(song => {
         return (
-            normalizeText(song.title).includes(kw) ||
+            normalizeText(song.title || "").includes(kw) ||
             normalizeText(song.singer || "").includes(kw) ||
             normalizeText(song.tone || "").includes(kw)
         );
     });
 
-    renderSongs(filteredSongs);
+    renderSongs(result);
 }
 
 function renderSongs(list) {
+
     const box = document.getElementById("search-results");
 
     if (!box) return;
 
     if (!list.length) {
         box.innerHTML = `
-            <div style="padding:20px;color:#aaa;text-align:center">
+            <div style="
+                padding:30px;
+                text-align:center;
+                color:#aaa;
+                font-size:18px;
+            ">
                 Không tìm thấy bài hát
             </div>
         `;
@@ -70,28 +85,35 @@ function renderSongs(list) {
         <div class="item">
             <div class="info-box">
                 <div class="v-meta">
-                    <div class="v-title">${song.title}</div>
+
+                    <div class="v-title">
+                        ${song.title || ""}
+                    </div>
 
                     <div class="v-singer">
-                        ${song.singer || "Không rõ ca sĩ"}
+                        ${song.singer || "Karaoke"}
                     </div>
 
                     <div class="v-stats">
                         Tone: ${song.tone || "-"}
                     </div>
+
                 </div>
 
-                <button class="btn-add-q"
-                        onclick="openLyrics(${index})">
-                    <i class="fas fa-music"></i>
-                </button>
+                <div class="actions-col">
+                    <button class="btn-add-q"
+                            onclick="showLyrics(${index})">
+                        <i class="fas fa-music"></i>
+                    </button>
+                </div>
             </div>
         </div>
     `).join("");
 }
 
-function openLyrics(index) {
-    const song = filteredSongs[index];
+function showLyrics(index) {
+
+    const song = allSongs[index];
 
     if (!song) return;
 
@@ -101,59 +123,41 @@ function openLyrics(index) {
     if (!layer || !content) return;
 
     content.innerHTML = `
-        <div style="font-size:58px;color:#ffeb3b;margin-bottom:25px">
-            ${song.title}
+        <div style="
+            color:#ffeb3b;
+            font-size:60px;
+            margin-bottom:25px;
+            font-weight:bold;
+        ">
+            ${song.title || ""}
         </div>
 
-        <div style="font-size:32px;color:#42a5f5;margin-bottom:40px">
+        <div style="
+            color:#42a5f5;
+            font-size:34px;
+            margin-bottom:35px;
+        ">
             ${song.singer || ""}
         </div>
 
-        <div style="white-space:pre-wrap">
-            ${song.lyrics || "Không có lời bài hát"}
+        <div style="
+            white-space:pre-wrap;
+            line-height:1.8;
+            font-size:42px;
+        ">
+            ${song.lyrics || ""}
         </div>
     `;
 
     layer.style.display = "block";
 }
 
-function closeLyrics() {
+function closeLyricsLayer() {
+
     const layer = document.getElementById("lyrics-tv-layer");
 
     if (layer) {
         layer.style.display = "none";
-    }
-}
-
-function showLoading(status) {
-    let loading = document.getElementById("songs-loading");
-
-    if (!loading) {
-        loading = document.createElement("div");
-        loading.id = "songs-loading";
-
-        loading.style.position = "fixed";
-        loading.style.top = "20px";
-        loading.style.right = "20px";
-        loading.style.background = "#000";
-        loading.style.color = "#fff";
-        loading.style.padding = "10px 15px";
-        loading.style.borderRadius = "10px";
-        loading.style.zIndex = "999999";
-
-        document.body.appendChild(loading);
-    }
-
-    loading.innerText = status
-        ? "Đang tải dữ liệu bài hát..."
-        : "Đã tải dữ liệu";
-
-    loading.style.display = "block";
-
-    if (!status) {
-        setTimeout(() => {
-            loading.style.display = "none";
-        }, 2000);
     }
 }
 
@@ -164,14 +168,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("input-q");
 
     if (input) {
+
         input.addEventListener("input", e => {
             searchSongs(e.target.value);
         });
+
     }
 
-    const lyricsLayer = document.getElementById("lyrics-tv-layer");
+    const layer = document.getElementById("lyrics-tv-layer");
 
-    if (lyricsLayer) {
-        lyricsLayer.addEventListener("click", closeLyrics);
+    if (layer) {
+        layer.addEventListener("click", closeLyricsLayer);
     }
+
 });
