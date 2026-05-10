@@ -19,7 +19,7 @@ async function loadSongs() {
 
     } catch (err) {
         console.error(err);
-        alert("Không tải được dữ liệu bài hát!");
+        alert("Không tải được rồi Điều ơi. dữ liệu bài hát!");
     } finally {
         showLoading(false);
     }
