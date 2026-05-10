@@ -1,5 +1,5 @@
 
-const SONGS_URL = "https://YOURNAME.github.io/karaoke-data/songs.json";
+const SONGS_URL = "https://dieuvanban.github.io/Karaoke-pro-max/songs.json";
 
 let allSongs = [];
 let filteredSongs = [];
